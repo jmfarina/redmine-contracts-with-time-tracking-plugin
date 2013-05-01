@@ -13,7 +13,9 @@ class Contract < ActiveRecord::Base
   
 
   def hours_purchased
-    self.purchase_amount / self.hourly_rate
+    unless self.purchase_amount.nil?
+      self.purchase_amount / self.hourly_rate
+	end
   end
   
   def hours_spent
@@ -21,11 +23,15 @@ class Contract < ActiveRecord::Base
   end
   
   def amount_remaining
-    self.purchase_amount - (self.hours_spent * self.hourly_rate)
+    unless self.purchase_amount.nil?
+      self.purchase_amount - (self.hours_spent * self.hourly_rate)
+	end
   end
 
   def hours_remaining
-    self.hours_purchased - self.hours_spent
+    unless self.purchase_amount.nil?
+      self.hours_purchased - self.hours_spent
+	end
   end
 
 	def exceeds_remaining_hours_by?(hours=0)
