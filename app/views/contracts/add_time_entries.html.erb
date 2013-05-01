@@ -8,6 +8,7 @@
         <th><%= l(:label_date) %></th>
         <th><%= l(:label_current_contract) %></th>
         <th><%= l(:label_member) %></th>
+        <th><%= l(:label_issue_status) %></th>
         <th><%= l(:label_activity) %></th>
         <th><%= l(:label_issue) %></th>
         <th><%= l(:label_comments) %></th>
@@ -18,12 +19,13 @@
     </thead>
     <% @time_entries.each do |time_entry| %>
       <tr class="<%= cycle("odd", "even") %>">
-        <% ((time_entry.contract != nil) && (time_entry.contract.id == @contract.id)) ? if_disabled = true : if_disabled = false %>
+        <% ((time_entry.contract != nil)) ? if_disabled = true : if_disabled = false %>
         <% ((time_entry.contract != nil) && (time_entry.contract.id == @contract.id)) ? if_checked  = true : if_checked = false %>
         <td><%= check_box_tag("time_entries[#{time_entry.id}]", "1", if_checked, :disabled => if_disabled) %></td>
         <td><%= format_date(time_entry.spent_on) %></td>
         <td><%= time_entry.contract.title unless time_entry.contract == nil %></td>
         <td><%= link_to time_entry.user.name, user_path(time_entry.user) %></td>
+        <td><%= time_entry.issue.status %></td>
         <td><%= time_entry.activity.name %></td>
         <td><%= link_to time_entry.issue, issue_path(time_entry.issue) unless !time_entry.issue %></td>
         <td><%= time_entry.comments %></td>
