@@ -14,15 +14,15 @@
   </div>
   <div>
     <p><%= f.label l(:field_agreement_date) %></p>
-    <p><%= f.date_select :agreement_date %></p>
+    <p><%= f.date_select :agreement_date, :include_blank => true %></p>
   </div>
   <div>
     <p><%= f.label l(:field_start_date) %></p>
-    <p><%= f.date_select :start_date %></p>
+    <p><%= f.date_select :start_date, :include_blank => true %></p>
   </div>
   <div>
     <p><%= f.label l(:field_end_date) %></p>
-    <p><%= f.date_select :end_date %></p>
+    <p><%= f.date_select :end_date, :include_blank => true %></p>
   </div>
   <div>
     <p><%= f.label l(:field_purchase_amount) %></p>

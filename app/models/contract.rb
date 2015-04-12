@@ -5,16 +5,21 @@ class Contract < ActiveRecord::Base
   has_many   :user_contract_rates
   has_many   :expenses
 
-  validates_presence_of :title, :start_date, :end_date, :agreement_date,
-                        :purchase_amount, :hourly_rate, :project_id
+#  validates_presence_of :title, :start_date, :end_date, :agreement_date, 
+#                        :purchase_amount, :hourly_rate, :project_id
+  validates_presence_of :title, :hourly_rate, :project_id
+
   validates :title, :uniqueness => { :case_sensitive => false }
+  #validates :start_date, :is_after_agreement_date => true
   validates :end_date, :is_after_start_date => true
   before_destroy { |contract| contract.time_entries.clear }
   after_save :apply_rates
   attr_accessor :rates
 
   def hours_purchased
+    unless self.purchase_amount.nil?
     self.purchase_amount / self.hourly_rate
+  end
   end
 
   def hours_spent
@@ -44,11 +49,15 @@ class Contract < ActiveRecord::Base
   end
 
   def amount_remaining
+    unless self.purchase_amount.nil?
     self.purchase_amount - self.billable_amount_total - self.expenses_total
+  end
   end
 
   def hours_remaining
+    unless self.purchase_amount.nil?
     self.amount_remaining / self.hourly_rate
+  end
   end
 
   def exceeds_remaining_hours_by?(hours=0)

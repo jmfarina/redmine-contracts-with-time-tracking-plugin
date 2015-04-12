@@ -5,6 +5,7 @@
       <th><%= l(:label_member) %></th>
       <th><%= l(:label_activity) %></th>
       <th><%= l(:label_issue) %></th>
+      <th><%= l(:label_issue_status) %></th>
       <th><%= l(:label_comments) %></th>
       <th><%= l(:label_hours) %></th>
       <th></th>
@@ -17,6 +18,7 @@
       <td><%= link_to time_entry.user.name, user_path(time_entry.user) %></td>
       <td><%= time_entry.activity.name %></td>
       <td><%= link_to time_entry.issue, issue_path(time_entry.issue) unless !time_entry.issue %></td>
+      <td><%= time_entry.issue.status %></td>
       <td><%= time_entry.comments %></td>
       <td><%= time_entry.hours %></td>
       <td>

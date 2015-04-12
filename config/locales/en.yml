@@ -39,6 +39,7 @@ en:
   label_member: Member
   label_activity: Activity
   label_issue: Issue
+  label_issue_status: Status
   label_comments: Comments
   label_apply: Apply
   label_name: Name
